@@ -5,6 +5,7 @@
   imports = [
     ./programs
 		./others
+		./term
   ];
 
 	# Basic info
