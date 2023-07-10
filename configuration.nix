@@ -13,18 +13,17 @@
 	# Enable flakes
 	nix.settings.experimental-features = [ "nix-command" "flakes"];
 	nix.settings.auto-optimise-store = true;
+	nix.gc = {
+			automatic = true;
+			dates = "weekly";
+			options = "--delete-older-than 1w";
+	};
 
   # Bootloader.
-  boot.loader = {
-     efi = {
-       canTouchEfiVariables = true;
-     };
-     grub = {
-       enable = true;
-       efiSupport = true;
-       device = "nodev";
-     };
-  };
+	boot.lodaer.systemd-boot =  {
+		enable = true;
+		configurationLimit = 10;
+	};
 
 	# Define your hostname.
   networking.hostName = "nixos"; 
