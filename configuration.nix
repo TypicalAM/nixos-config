@@ -11,33 +11,36 @@
     ];
 
 	# Enable flakes
-	nix.settings.experimental-features = [ "nix-command" "flakes"];
-	nix.settings.auto-optimise-store = true;
-	nix.gc = {
+	nix = {
+		settings = {
+			experimental-features = [ "nix-command" "flakes"];
+			auto-optimise-store = true;
+		};
+		gc = {
 			automatic = true;
 			dates = "weekly";
 			options = "--delete-older-than 1w";
+		};
 	};
 
 	# Bootloader
   boot.loader = {
-  	efi = {
-   		canTouchEfiVariables = true;
-   	};
+  	efi.canTouchEfiVariables = true;
     grub = {
-       enable = true;
-       efiSupport = true;
-       device = "nodev";
+			enable = true;
+      efiSupport = true;
+      device = "nodev";
+			configurationLimit = 10;
     };
   };
 
 	# Define your hostname.
-  networking.hostName = "nixos"; 
+  networking = {
+		hostName = "nixos"; 
+		networkmanager.enable = true;
+	};
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
+ 	# Set your time zone.
   time.timeZone = "Europe/Warsaw";
 
   # Select internationalisation properties.
@@ -61,6 +64,7 @@
   users.users.adam = {
     isNormalUser = true;
     description = "Adam Piaseczny";
+		shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "video" "wheel" "audio" "libvirt" "kvm"];
   };
 
@@ -97,19 +101,15 @@
 		noto-fonts
 	];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+	hardware.pulseaudio = {
+		enable = true;
+		support32Bit = true;
+	};
 
-	hardware.pulseaudio.enable = true;
-	hardware.pulseaudio.support32Bit = true;
-	programs.light.enable = true;
-	programs.zsh.enable = true;
-	users.users.adam.shell = pkgs.zsh;
+	programs = {
+		light.enable = true;
+		zsh.enable = true;
+	};
 
   # List services that you want to enable:
 	services = {
@@ -127,25 +127,6 @@
 
 	security.polkit.enable = true;
   environment.pathsToLink = [ "/libexec" ];
-
-  # Window manager stuff
-  services.xserver = {
-    enable = true;
-    layout = "pl";
-    xkbVariant = "";
-
-		desktopManager.xterm.enable = false;
-		displayManager = {
-			sddm.enable = true;
-			sddm.theme = "kde-plasma-chili";
-			defaultSession = "none+i3";
-		};
-
-		windowManager.i3 = {
-			package = pkgs.i3-gaps;
-			enable = true;
-		};
-  };
 
 	systemd = {
 		user.services.polkit-gnome-authentication-agent-1 = {

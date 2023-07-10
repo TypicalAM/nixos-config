@@ -4,7 +4,7 @@
 	# Include subfolders
   imports = [
     ./programs
-		./wm
+		./others
   ];
 
 	# Basic info

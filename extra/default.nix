@@ -3,7 +3,7 @@
 {
 	imports = [
 		./nvidia.nix
-		./sddm.nix
+		./dm.nix
 		./devel.nix
 	];
 }
