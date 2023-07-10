@@ -19,11 +19,17 @@
 			options = "--delete-older-than 1w";
 	};
 
-  # Bootloader.
-	boot.lodaer.systemd-boot =  {
-		enable = true;
-		configurationLimit = 10;
-	};
+	# Bootloader
+  boot.loader = {
+  	efi = {
+   		canTouchEfiVariables = true;
+   	};
+    grub = {
+       enable = true;
+       efiSupport = true;
+       device = "nodev";
+    };
+  };
 
 	# Define your hostname.
   networking.hostName = "nixos"; 
@@ -70,12 +76,10 @@
     vim
     wget
 		curl
+
 		# Others
 		polkit_gnome
 		pass
-		obs-studio
-		discord
-    polybar
     firefox
     rofi
     feh
@@ -84,12 +88,6 @@
 		lxappearance
 		qt5ct
 		virt-manager
-		# Terminal
-    starship
-		# Compilers
-    go
-		gcc
-		cargo
   ];
 
 	# Font things
@@ -114,9 +112,12 @@
 	users.users.adam.shell = pkgs.zsh;
 
   # List services that you want to enable:
-	services.picom.enable = true;
+	services = {
+		picom.enable = true;
+		dbus.enable = true;
+	};
+  
   virtualisation.libvirtd.enable = true; 
-  services.dbus.enable = true;
   xdg.portal = {
     enable = true;
     # wlr.enable = true;

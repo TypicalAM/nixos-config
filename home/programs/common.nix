@@ -46,6 +46,9 @@
     pciutils # lspci
     usbutils # lsusb
 
+		discord
+    polybar
+		obs-studio
 	];
 
 	programs = {
@@ -54,6 +57,19 @@
 		jq.enable = true;
 		ssh.enable = true;
 	};
+
+	services = {
+		network-manager-applet.enable = true;
+		redshift = {
+			latitude = "52.00N";
+			longitude = "20.00E";
+			enable = true;
+			tray = true;
+		};
+	};
+
+
+	programs.pywal.enable = true;
 
   # basic configuration of git, please change to your own
   programs.git = {
