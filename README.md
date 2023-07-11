@@ -27,7 +27,7 @@ sudo nixos-rebuild switch
 
 Things that I have yet to figure out:
 
-- [ ] Dual GPU (AMD + NVIDIA)
+- [x] Dual GPU (AMD + NVIDIA) (partly)
 - [ ] Kitty and zsh and aliases
 - [ ] VFIO and GPU Passthrough
 - [ ] Nextcloud-client not complaining

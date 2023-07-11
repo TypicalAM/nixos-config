@@ -46,10 +46,16 @@
     pciutils # lspci
     usbutils # lsusb
 
+		# Others
 		discord
 		telegram-desktop
     polybar
 		obs-studio
+
+		# Gaming
+		dwarfs
+		wine-staging
+		fuse-overlayfs
 	];
 
 	services = {
