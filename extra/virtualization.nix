@@ -8,6 +8,10 @@ let gpuIDs = [
 		gpu-passthrough.configuration = {
 			system.nixos.tags = [ "gpu-passthrough" ];
 
+			systemd.tmpfiles.rules = [
+  			"f /dev/shm/looking-glass 0660 adam kvm -"
+			];
+
 			environment.systemPackages = with pkgs; [
 				virt-manager
 				looking-glass-client
