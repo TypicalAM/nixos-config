@@ -31,7 +31,7 @@ Things that I have yet to figure out:
 - [ ] Kitty and zsh and aliases
 - [ ] VFIO and GPU Passthrough
 - [ ] Nextcloud-client not complaining
-- [ ] Shared grub for all my systems
+- [x] Shared grub for all my systems (decided against it since it would put a dependency on external systems)
 
 ## Additional Resources
 

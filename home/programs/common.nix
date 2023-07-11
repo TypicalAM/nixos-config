@@ -47,6 +47,7 @@
     usbutils # lsusb
 
 		discord
+		telegram-desktop
     polybar
 		obs-studio
 	];
