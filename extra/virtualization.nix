@@ -21,7 +21,7 @@ let gpuIDs = [
 			virtualisation.spiceUSBRedirection.enable = true;
 
 			# Enable correct groups for user adam
-			users.users.adam.extraGroups = [ "libvirt" "kvm" ];
+			users.users.adam.extraGroups = [ "libvirtd" "kvm" ];
 
 			# Set the correct modules and boot params
 			boot = {
