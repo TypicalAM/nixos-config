@@ -5,5 +5,6 @@
 		./nvidia.nix
 		./dm.nix
 		./devel.nix
+		./virtualization.nix
 	];
 }

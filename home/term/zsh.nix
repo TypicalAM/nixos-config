@@ -47,6 +47,7 @@
 
 			# Navigation and file operations
 			lx = "exa -alhG --group-directories-first";
+			ra = ". ranger";
 			"cd." = "cd ../";
 			"cd.." = "cd ../../";
 			x = "xdg-open";

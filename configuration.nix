@@ -65,7 +65,7 @@
     isNormalUser = true;
     description = "Adam Piaseczny";
 		shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "video" "wheel" "audio" "libvirt" "kvm"];
+    extraGroups = [ "networkmanager" "video" "wheel" "audio"];
   };
 
   # Allow unfree packages
@@ -91,7 +91,6 @@
     xclip
 		lxappearance
 		qt5ct
-		virt-manager
   ];
 
 	# Font things
@@ -117,7 +116,6 @@
 		dbus.enable = true;
 	};
   
-  virtualisation.libvirtd.enable = true; 
   xdg.portal = {
     enable = true;
     # wlr.enable = true;
