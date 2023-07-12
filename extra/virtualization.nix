@@ -17,8 +17,14 @@ let gpuIDs = [
 				looking-glass-client
 			];
 
-			virtualisation.libvirtd.enable = true; 
-			virtualisation.spiceUSBRedirection.enable = true;
+			virtualisation = {
+				spiceUSBRedirection.enable = true;
+
+				libvirtd = {
+					enable = true; 
+   	 			qemu.ovmf.packages = [ pkgs.OVMFFull.fd ] ; # Include OVMF_CODE.secboot.fd
+				};
+			};
 
 			# Enable correct groups for user adam
 			users.users.adam.extraGroups = [ "libvirtd" "kvm" ];

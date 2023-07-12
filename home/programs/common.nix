@@ -54,8 +54,9 @@
 
 		# Gaming
 		dwarfs
-		wine-staging
 		fuse-overlayfs
+		nix-index
+		wineWowPackages.staging
 	];
 
 	services = {
