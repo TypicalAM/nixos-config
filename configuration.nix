@@ -131,7 +131,6 @@
 
   # List services that you want to enable:
 	services = {
-		picom.enable = true;
 		dbus.enable = true;
 	};
   

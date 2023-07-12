@@ -4,7 +4,6 @@
 	home.sessionVariables = {
 		EDITOR = "nvim";
 		GOPATH = "${config.home.homeDirectory}/.go";
-		QT_QPA_PLATFORMTHEME = "qt5ct";
 		KRITA_NO_STYLE_OVERRIDE = 1;
 	};
 
