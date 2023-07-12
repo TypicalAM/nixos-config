@@ -89,8 +89,6 @@
     feh
     maim
     xclip
-		lxappearance
-		qt5ct
     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
       pkgs.buildFHSUserEnv (base // {
       name = "fhs";

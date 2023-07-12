@@ -35,14 +35,4 @@
 			];
 		};
 	};
-
-  home.packages = with pkgs; [
-    catppuccin-kvantum
-    libsForQt5.qtstyleplugin-kvantum
-  ];
-
-  home.sessionVariables = {
-    GTK_USE_PORTAL = "1";
-    QT_QPA_PLATFORMTHEME = "qt5ct";
-  };
 }

@@ -2,7 +2,19 @@
 
 {
   # Window manager stuff
-	environment.systemPackages = with pkgs; [ libsForQt5.qt5.qtgraphicaleffects	];
+	environment.systemPackages = with pkgs; [ 
+		libsForQt5.qt5.qtgraphicaleffects
+		libsForQt5.qtstyleplugin-kvantum
+		catppuccin-kvantum
+		lxappearance
+		qt5ct
+	];
+
+	qt = {
+		enable = true;
+		platformTheme = "qt5ct";
+	};
+
   services.xserver = {
     enable = true;
     layout = "pl";
