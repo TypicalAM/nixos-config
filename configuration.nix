@@ -24,14 +24,30 @@
 	};
 
 	# Bootloader
-  boot.loader = {
-  	efi.canTouchEfiVariables = true;
-    grub = {
-			enable = true;
-      efiSupport = true;
-      device = "nodev";
-			configurationLimit = 10;
-    };
+  boot = {
+		kernelParams = [ "quiet" "splash" ];
+
+		loader = {
+			efi.canTouchEfiVariables = true;
+			grub = {
+				enable = true;
+				efiSupport = true;
+				device = "nodev";
+				configurationLimit = 10;
+
+				theme = pkgs.stdenv.mkDerivation {
+					pname = "distro-grub-themes";
+					version = "1.2";
+					src = pkgs.fetchFromGitHub {
+						owner = "Lxtharia";
+						repo = "minegrub-theme";
+						rev = "75764c248b9c523fb32c7387bed9aa34ba06a535";
+						sha256 = "n/fJSFrrPPyTBS8/XHaARyCxccRZiqPhhNFq0x8Q2kA=";
+					};
+					installPhase = "cp -r . $out";
+				};
+    	};
+		};
   };
 
 	# Define your hostname.
