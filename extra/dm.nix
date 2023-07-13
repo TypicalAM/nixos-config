@@ -16,6 +16,8 @@ in {
 		qt5ct
 	];
 
+	programs.dconf.enable = true;
+
 	# Set the platformTheme here because it's buggy in HM
 	qt = {
 		enable = true;

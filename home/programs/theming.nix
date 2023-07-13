@@ -2,15 +2,23 @@
 
 let
 	catppuccin-theme = pkgs.fetchFromGitHub {
-			owner = "catppuccin";
-			repo = "Kvantum";
-			rev = "04be2ad3d28156cfb62478256f33b58ee27884e9";
-			sha256 = "apOPiVwePXbdKM1/0HAfHzIqAZxvfgL5KHzhoIMXLqI=";
+		owner = "catppuccin";
+		repo = "Kvantum";
+		rev = "04be2ad3d28156cfb62478256f33b58ee27884e9";
+		sha256 = "apOPiVwePXbdKM1/0HAfHzIqAZxvfgL5KHzhoIMXLqI=";
+	};
+	mcmojave-circle = pkgs.fetchFromGitHub {
+		owner = "vinceliuice";
+		repo = "McMojave-circle";
+		rev = "e9c7e7674de7e34780498e4e05a90dd36fd02367";
+		sha256 = "sLeP6WAA1lgOH8YgnxhMdTqzeWpluJolNh6yGOXA0MY=";
 	};
 in {
 	home.packages = with pkgs; [
-		tela-icon-theme
+		bibata-cursors
 	];
+
+	home.file.".icons/McMojave-circle".source = "${mcmojave-circle}/src";
 
 	xdg = {
 		configFile = {
@@ -20,20 +28,18 @@ in {
 				[General]
 				theme=Catpuccin-Mocha-Lavender
 			'';
-			"qt5ct/qt5ct.conf".text = ''
-				[Appearance]
-				color_scheme_path=${pkgs.qt5ct}/colors/airy.conf
-				custom_palette=false
-				icon_theme=McMojave-circle-purple
-				standard_dialogs=default
-				style=kvantum
-			'';
 		};
 	};
 
-	gtk.iconTheme = {
-		name = "Tela-Icon-Theme";
-		package = pkgs.tela-icon-theme;
+	gtk = {
+		enable = true;
+		iconTheme.name = "McMojave-circle";
+		cursorTheme.name = "Bibata-Modern-Ice";
+
+	 	theme = {
+			package = pkgs.materia-theme;
+			name = "Materia-dark-compact";
+		};
 	};
 
 	services.picom = {
