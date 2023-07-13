@@ -89,6 +89,7 @@
     feh
     maim
     xclip
+		nextcloud-client
     (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
       pkgs.buildFHSUserEnv (base // {
       name = "fhs";
@@ -115,6 +116,9 @@
 		material-design-icons
 		noto-fonts
 	];
+
+	# For nextcloud
+ 	services.gnome.gnome-keyring.enable = true;
 
 	hardware.pulseaudio = {
 		enable = true;

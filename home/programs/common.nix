@@ -67,11 +67,6 @@
 			enable = true;
 			tray = true;
 		};
-
-		nextcloud-client = {
-			enable = true;
-			startInBackground = true;
-		};
 	};
 
   programs = {
