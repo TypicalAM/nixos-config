@@ -136,10 +136,15 @@
 	# For nextcloud
  	services.gnome.gnome-keyring.enable = true;
 
-	hardware.pulseaudio = {
+	services.pipewire = {
+		audio.enable = true;
 		enable = true;
-		support32Bit = true;
-	};
+		alsa.enable = true;
+		alsa.support32Bit = true;
+		pulse.enable = true;
+		jack.enable = true;
+		wireplumber.enable = true;
+  };
 
 	programs = {
 		light.enable = true;
