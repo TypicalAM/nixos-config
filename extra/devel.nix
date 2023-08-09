@@ -5,11 +5,17 @@
     go
 		gcc
 		cargo
+		nodejs
+		gotestsum
+		pre-commit
 
-		(python3.withPackages(ps: with ps; [
-			pandas
-			matplotlib
-			requests
-		]))
+		(
+			python3.withPackages(ps: with ps; [
+				pip
+				pandas
+				matplotlib
+				requests
+			])
+		)
 	];
 }

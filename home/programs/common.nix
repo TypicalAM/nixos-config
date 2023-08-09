@@ -6,6 +6,7 @@
     neofetch
     neovim
 		ranger
+		gh
 
     # archives
     zip
@@ -81,5 +82,7 @@
 			userName = "TypicalAM";
 			userEmail = "tpam_piaseczny@protonmail.com";
 		};
+
+		gh.enable = true;
 	};
 }
