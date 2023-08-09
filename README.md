@@ -28,9 +28,11 @@ sudo nixos-rebuild switch
 Things that I have yet to figure out:
 
 - [x] Dual GPU (AMD + NVIDIA) (partly)
+- [ ] Pywalfox
+- [ ] Python `venv`s
 - [ ] Kitty and zsh and aliases
-- [ ] VFIO and GPU Passthrough
-- [ ] Nextcloud-client not complaining
+- [x] VFIO and GPU Passthrough
+- [x] Nextcloud-client not complaining
 - [x] Shared grub for all my systems (decided against it since it would put a dependency on external systems)
 
 ## Additional Resources
