@@ -76,12 +76,15 @@
   # Configure console keymap
   console.keyMap = "pl2";
 
+	# Enable docker
+	virtualisation.docker.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
     isNormalUser = true;
     description = "Adam Piaseczny";
 		shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "video" "wheel" "audio"];
+    extraGroups = [ "networkmanager" "video" "wheel" "audio" "docker"];
   };
 
   # Allow unfree packages
@@ -90,6 +93,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+		act
+		youtube-dl
+		spotify
+		spicetify-cli
+
 		# Essencials
 		kitty
     git
