@@ -90,7 +90,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-		act
 		youtube-dl
 		spotify
 		spicetify-cli
@@ -111,24 +110,6 @@
     maim
     xclip
 		nextcloud-client
-    (let base = pkgs.appimageTools.defaultFhsEnvArgs; in
-      pkgs.buildFHSUserEnv (base // {
-      name = "fhs";
-      targetPkgs = pkgs: (
-        # pkgs.buildFHSUserEnv provides only a minimal FHS environment,
-        # lacking many basic packages needed by most software.
-        # Therefore, we need to add them manually.
-        #
-        # pkgs.appimageTools provides basic packages required by most software.
-        (base.targetPkgs pkgs) ++ [
-          pkgs.pkg-config
-          pkgs.ncurses
-        ]
-      );
-      profile = "export FHS=1";
-      runScript = "bash";
-      extraOutputsToInstall = ["dev"];
-    }))
   ];
 
 	# Font things

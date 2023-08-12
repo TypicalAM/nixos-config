@@ -81,6 +81,7 @@
 			enable = true;
 			userName = "TypicalAM";
 			userEmail = "tpam_piaseczny@protonmail.com";
+			ignores = [ "shell.nix" ];
 		};
 
 		gh.enable = true;
