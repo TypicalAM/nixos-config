@@ -4,6 +4,18 @@ let gpuIDs = [
 ]; in { config, lib, pkgs, ... }:
 
 {
+	# Enable docker
+	virtualisation.docker.enable = true;
+
+	# Virt-manager and looking glass
+	environment.systemPackages = with pkgs; [
+		virt-manager
+		looking-glass-client
+	];
+
+	# Enable correct groups for user adam
+	users.users.adam.extraGroups = [ "docker" "libvirt" "kvm" ];
+
 	specialisation = {
 		gpu-passthrough.configuration = {
 			system.nixos.tags = [ "gpu-passthrough" ];
@@ -12,12 +24,7 @@ let gpuIDs = [
   			"f /dev/shm/looking-glass 0660 adam kvm -"
 			];
 
-			environment.systemPackages = with pkgs; [
-				virt-manager
-				looking-glass-client
-			];
-
-			virtualisation = {
+		virtualisation = {
 				spiceUSBRedirection.enable = true;
 
 				libvirtd = {

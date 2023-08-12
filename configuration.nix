@@ -76,15 +76,12 @@
   # Configure console keymap
   console.keyMap = "pl2";
 
-	# Enable docker
-	virtualisation.docker.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.adam = {
     isNormalUser = true;
     description = "Adam Piaseczny";
 		shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "video" "wheel" "audio" "docker"];
+    extraGroups = [ "networkmanager" "video" "wheel" "audio" ];
   };
 
   # Allow unfree packages
