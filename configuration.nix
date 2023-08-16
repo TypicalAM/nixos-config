@@ -177,10 +177,15 @@
 
 	security.sudo.extraRules = [{
 		groups = ["wheel"];
-		commands = [{
-			command = "/run/current-system/sw/bin/nixos-rebuild";
-			options = [ "NOPASSWD" ];
-		}];
+		commands = [
+			{
+				command = "/run/current-system/sw/bin/nixos-rebuild";
+				options = [ "NOPASSWD" ];
+			} {
+				command = "/run/current-system/sw/bin/virsh";
+				options = [ "NOPASSWD" ];
+			}
+		];
 	}];
 
   # Open ports in the firewall.

@@ -7,17 +7,18 @@ let gpuIDs = [
 	# Enable docker
 	virtualisation.docker.enable = true;
 
-	# Virt-manager and looking glass
-	environment.systemPackages = with pkgs; [
-		virt-manager
-		looking-glass-client
-	];
-
 	# Enable correct groups for user adam
-	users.users.adam.extraGroups = [ "docker" "libvirt" "kvm" ];
+	users.users.adam.extraGroups = [ "docker" ];
 
 	specialisation = {
 		gpu-passthrough.configuration = {
+
+			# Virt-manager and looking glass
+			environment.systemPackages = with pkgs; [
+				virt-manager
+				looking-glass-client
+			];
+
 			system.nixos.tags = [ "gpu-passthrough" ];
 
 			systemd.tmpfiles.rules = [
