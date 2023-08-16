@@ -90,6 +90,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+		kolourpaint
+		kdenlive
 		youtube-dl
 		spotify
 		spicetify-cli
@@ -102,6 +104,7 @@
 		curl
 
 		# Others
+		gparted
 		polkit_gnome
 		pass
     firefox
