@@ -23,6 +23,7 @@ let gpuIDs = [
 
 			systemd.tmpfiles.rules = [
   			"f /dev/shm/looking-glass 0660 adam kvm -"
+  			"f /dev/shm/my-little-shared-memory 0660 adam kvm -"
 			];
 
 		virtualisation = {

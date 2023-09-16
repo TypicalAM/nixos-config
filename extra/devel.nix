@@ -2,6 +2,8 @@
 
 {
 	environment.systemPackages = with pkgs; [
+		jdk
+		jetbrains.idea-ultimate
 		gnumake
 		act
     go

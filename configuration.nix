@@ -26,6 +26,7 @@
 	# Bootloader
   boot = {
 		kernelParams = [ "quiet" "splash" ];
+		supportedFilesystems = [ "ntfs" ];
 
 		loader = {
 			efi.canTouchEfiVariables = true;
