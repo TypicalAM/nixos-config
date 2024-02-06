@@ -18,14 +18,19 @@
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/4968-5914";
-      fsType = "vfat";
-    };
-
   fileSystems."/mnt/virt" =
     { device = "/dev/disk/by-uuid/2ced620b-6c69-463d-af6e-9a1c8dfc7036";
       fsType = "ext4";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/eccadd0d-db32-4690-a947-53996552b64c";
+      fsType = "ext4";
+    };
+
+  fileSystems."/boot/efi" =
+    { device = "/dev/disk/by-uuid/4968-5914";
+      fsType = "vfat";
     };
 
   swapDevices = [ ];
@@ -38,7 +43,7 @@
   # networking.interfaces.br-f7ccfff8fa3f.useDHCP = lib.mkDefault true;
   # networking.interfaces.docker0.useDHCP = lib.mkDefault true;
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
-  # networking.interfaces.virbr0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.vboxnet0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp4s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

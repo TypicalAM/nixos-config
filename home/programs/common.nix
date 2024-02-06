@@ -62,12 +62,6 @@
 
 	services = {
 		network-manager-applet.enable = true;
-		redshift = {
-			latitude = "52";
-			longitude = "20";
-			enable = true;
-			tray = true;
-		};
 	};
 
   programs = {
