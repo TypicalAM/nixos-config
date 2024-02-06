@@ -1,7 +1,16 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs = { nm-applet.enable = true; };
+  programs = {
+    nm-applet.enable = true;
+    steam = {
+      enable = true;
+      remotePlay.openFirewall =
+        true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall =
+        true; # Open ports in the firewall for Source Dedicated Server
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     # Theming
@@ -44,6 +53,7 @@
     nix-output-monitor
 
     # Random
+    whatsapp-for-linux
     telegram-desktop
     discord
     obs-studio
