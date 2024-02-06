@@ -125,7 +125,6 @@
 		polkit_gnome
 		pass
     firefox
-    rofi
     feh
     maim
     xclip
