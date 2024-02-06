@@ -5,75 +5,64 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [ ./hardware-configuration.nix ];
 
-	# Enable flakes
-	nix = {
-		settings = {
-			experimental-features = [ "nix-command" "flakes"];
-			auto-optimise-store = true;
-		};
-		gc = {
-			automatic = true;
-			dates = "weekly";
-			options = "--delete-older-than 1w";
-		};
-	};
-
-	# Bootloader
-  boot = {
-		kernelParams = [ "quiet" "splash" ];
-		supportedFilesystems = [ "ntfs" ];
-
-		loader = {
-			efi = {
-				efiSysMountPoint = "/boot/efi";
-				canTouchEfiVariables = true;
-			};
-
-			grub = {
-				enable = true;
-				efiSupport = true;
-				device = "nodev";
-				configurationLimit = 10;
-				useOSProber = true;
-
-				extraEntries = ''
-					menuentry 'Fedora 39 (from nix)' --class fedora --class gnu-linux --class gnu --class os {
-						# load_video
-						set gfxpayload=keep
-						search --set=drive1 --fs-uuid eccadd0d-db32-4690-a947-53996552b64c
-
-						linux ($drive1)//vmlinuz-6.6.13-200.fc39.x86_64 root=UUID=40026f0a-cd70-40fa-8f0e-40ba836add2b ro rootflags=subvol=root rhgb quiet nvidia-drm.modeset=1 rd.driver.blacklist=nouveau modprobe.blacklist=nouveau resume=UUID=e43a7107-16ea-4228-8c10-8f02eb21bfae
-						initrd ($drive1)//initramfs-6.6.13-200.fc39.x86_64.img
-					}
-				'';
-
-				theme = pkgs.stdenv.mkDerivation {
-					pname = "distro-grub-themes";
-					version = "1.2";
-					src = pkgs.fetchFromGitHub {
-						owner = "Lxtharia";
-						repo = "minegrub-theme";
-						rev = "75764c248b9c523fb32c7387bed9aa34ba06a535";
-						sha256 = "n/fJSFrrPPyTBS8/XHaARyCxccRZiqPhhNFq0x8Q2kA=";
-					};
-					installPhase = "cp -r . $out";
-				};
-    	};
-		};
+  # Enable flakes
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 1w";
+    };
   };
 
-	# Define your hostname.
-  networking = {
-		hostName = "nixos"; 
-		networkmanager.enable = true;
-	};
+  # Bootloader
+  boot = {
+    kernelParams = [ "quiet" "splash" ];
+    supportedFilesystems = [ "ntfs" ];
 
- 	# Set your time zone.
+    loader = {
+      efi = {
+        efiSysMountPoint = "/boot/efi";
+        canTouchEfiVariables = true;
+      };
+
+      grub = {
+        enable = true;
+        efiSupport = true;
+        device = "nodev";
+        configurationLimit = 10;
+        useOSProber = true;
+
+        extraEntries =
+          "	menuentry 'Fedora 39 (from nix)' --class fedora --class gnu-linux --class gnu --class os {\n		# load_video\n		set gfxpayload=keep\n		search --set=drive1 --fs-uuid eccadd0d-db32-4690-a947-53996552b64c\n\n		linux ($drive1)//vmlinuz-6.6.13-200.fc39.x86_64 root=UUID=40026f0a-cd70-40fa-8f0e-40ba836add2b ro rootflags=subvol=root rhgb quiet nvidia-drm.modeset=1 rd.driver.blacklist=nouveau modprobe.blacklist=nouveau resume=UUID=e43a7107-16ea-4228-8c10-8f02eb21bfae\n		initrd ($drive1)//initramfs-6.6.13-200.fc39.x86_64.img\n	}\n";
+
+        theme = pkgs.stdenv.mkDerivation {
+          pname = "distro-grub-themes";
+          version = "1.2";
+          src = pkgs.fetchFromGitHub {
+            owner = "Lxtharia";
+            repo = "minegrub-theme";
+            rev = "75764c248b9c523fb32c7387bed9aa34ba06a535";
+            sha256 = "n/fJSFrrPPyTBS8/XHaARyCxccRZiqPhhNFq0x8Q2kA=";
+          };
+          installPhase = "cp -r . $out";
+        };
+      };
+    };
+  };
+
+  # Define your hostname.
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+  };
+
+  # Set your time zone.
   time.timeZone = "Europe/Warsaw";
 
   # Select internationalisation properties.
@@ -97,7 +86,7 @@
   users.users.adam = {
     isNormalUser = true;
     description = "Adam Piaseczny";
-		shell = pkgs.zsh;
+    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "video" "wheel" "audio" ];
   };
 
@@ -107,61 +96,59 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-		kolourpaint
-		kdenlive
-		youtube-dl
-		spotify
-		spicetify-cli
+    kolourpaint
+    kdenlive
+    youtube-dl
+    spotify
+    spicetify-cli
 
-		# Essencials
-		kitty
+    # Essencials
+    kitty
     git
     vim
     wget
-		curl
+    curl
 
-		# Others
-		gparted
-		polkit_gnome
-		pass
+    # Others
+    gparted
+    polkit_gnome
+    pass
     firefox
     feh
     maim
     xclip
-		nextcloud-client
+    nextcloud-client
   ];
 
-	# Font things
-	fonts.fonts = with pkgs; [
-		(nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-		material-design-icons
-		noto-fonts
-	];
+  # Font things
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    material-design-icons
+    noto-fonts
+  ];
 
-	# For nextcloud
- 	services.gnome.gnome-keyring.enable = true;
+  # For nextcloud
+  services.gnome.gnome-keyring.enable = true;
 
-	services.pipewire = {
-		audio.enable = true;
-		enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-		jack.enable = true;
-		wireplumber.enable = true;
+  services.pipewire = {
+    audio.enable = true;
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
   };
 
-	programs = {
-		light.enable = true;
-		zsh.enable = true;
-		nix-ld.enable = true;
-	};
+  programs = {
+    light.enable = true;
+    zsh.enable = true;
+    nix-ld.enable = true;
+  };
 
   # List services that you want to enable:
-	services = {
-		dbus.enable = true;
-	};
-  
+  services = { dbus.enable = true; };
+
   xdg.portal = {
     enable = true;
     # wlr.enable = true;
@@ -169,40 +156,40 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-	security.polkit.enable = true;
+  security.polkit.enable = true;
   environment.pathsToLink = [ "/libexec" ];
 
-	systemd = {
-		user.services.polkit-gnome-authentication-agent-1 = {
-			description = "polkit-gnome-authentication-agent-1";
-			wantedBy = [ "graphical-session.target" ];
-			wants = [ "graphical-session.target" ];
-			after = [ "graphical-session.target" ];
-			serviceConfig = {
-					Type = "simple";
-					ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-					Restart = "on-failure";
-					RestartSec = 1;
-					TimeoutStopSec = 10;
-				};
-		};
-		 extraConfig = ''
-			 DefaultTimeoutStopSec=10s
-		 '';
-	}; 
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart =
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+    extraConfig = "	 DefaultTimeoutStopSec=10s\n ";
+  };
 
-	security.sudo.extraRules = [{
-		groups = ["wheel"];
-		commands = [
-			{
-				command = "/run/current-system/sw/bin/nixos-rebuild";
-				options = [ "NOPASSWD" ];
-			} {
-				command = "/run/current-system/sw/bin/virsh";
-				options = [ "NOPASSWD" ];
-			}
-		];
-	}];
+  security.sudo.extraRules = [{
+    groups = [ "wheel" ];
+    commands = [
+      {
+        command = "/run/current-system/sw/bin/nixos-rebuild";
+        options = [ "NOPASSWD" ];
+      }
+      {
+        command = "/run/current-system/sw/bin/virsh";
+        options = [ "NOPASSWD" ];
+      }
+    ];
+  }];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

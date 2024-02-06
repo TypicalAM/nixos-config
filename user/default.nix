@@ -1,7 +1,5 @@
 { config, lib, pkgs, ... }:
 
 {
-	imports = [
-		./programs.nix
-	];
+  imports = [ ./programs.nix ];
 }
