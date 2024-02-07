@@ -55,7 +55,7 @@
     # Random
     whatsapp-for-linux
     telegram-desktop
-    discord
+    webcord
     obs-studio
 
     # Gaming

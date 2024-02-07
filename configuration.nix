@@ -4,7 +4,14 @@
 
 { config, pkgs, ... }:
 
-{
+let
+  minegrub-theme = pkgs.fetchFromGitHub {
+    owner = "Lxtharia";
+    repo = "minegrub-theme";
+    rev = "75764c248b9c523fb32c7387bed9aa34ba06a535";
+    sha256 = "n/fJSFrrPPyTBS8/XHaARyCxccRZiqPhhNFq0x8Q2kA=";
+  };
+in {
   imports = [ ./hardware-configuration.nix ];
 
   # Enable flakes
@@ -44,12 +51,7 @@
         theme = pkgs.stdenv.mkDerivation {
           pname = "distro-grub-themes";
           version = "1.2";
-          src = pkgs.fetchFromGitHub {
-            owner = "Lxtharia";
-            repo = "minegrub-theme";
-            rev = "75764c248b9c523fb32c7387bed9aa34ba06a535";
-            sha256 = "n/fJSFrrPPyTBS8/XHaARyCxccRZiqPhhNFq0x8Q2kA=";
-          };
+          src = "${minegrub-theme}";
           installPhase = "cp -r . $out";
         };
       };
@@ -145,9 +147,6 @@
     zsh.enable = true;
     nix-ld.enable = true;
   };
-
-  # List services that you want to enable:
-  services = { dbus.enable = true; };
 
   security.polkit.enable = true;
   environment.pathsToLink = [ "/libexec" ];
