@@ -149,13 +149,6 @@
   # List services that you want to enable:
   services = { dbus.enable = true; };
 
-  xdg.portal = {
-    enable = true;
-    # wlr.enable = true;
-    # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
-
   security.polkit.enable = true;
   environment.pathsToLink = [ "/libexec" ];
 

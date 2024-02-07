@@ -12,6 +12,9 @@ in { config, lib, pkgs, ... }:
   # Enable correct groups for user adam
   users.users.adam.extraGroups = [ "docker" ];
 
+  # Enable flatpak
+  services.flatpak.enable = true;
+
   specialisation = {
     gpu-passthrough.configuration = {
 
