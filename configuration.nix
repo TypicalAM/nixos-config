@@ -46,7 +46,7 @@ in {
         useOSProber = true;
 
         extraEntries =
-          "	menuentry 'Fedora 39 (from nix)' --class fedora --class gnu-linux --class gnu --class os {\n		# load_video\n		set gfxpayload=keep\n		search --set=drive1 --fs-uuid eccadd0d-db32-4690-a947-53996552b64c\n\n		linux ($drive1)//vmlinuz-6.6.13-200.fc39.x86_64 root=UUID=40026f0a-cd70-40fa-8f0e-40ba836add2b ro rootflags=subvol=root rhgb quiet nvidia-drm.modeset=1 rd.driver.blacklist=nouveau modprobe.blacklist=nouveau resume=UUID=e43a7107-16ea-4228-8c10-8f02eb21bfae\n		initrd ($drive1)//initramfs-6.6.13-200.fc39.x86_64.img\n	}\n";
+          "	menuentry 'Fedora 39 (manual)' --class fedora --class gnu-linux --class gnu --class os {\n		# load_video\n		set gfxpayload=keep\n		search --set=drive1 --fs-uuid eccadd0d-db32-4690-a947-53996552b64c\n\n		linux ($drive1)//vmlinuz-6.6.13-200.fc39.x86_64 root=UUID=2f8a33da-85e6-473f-8fe3-4bf41d049e47 ro rootflags=subvol=root rhgb quiet nvidia-drm.modeset=1 rd.driver.blacklist=nouveau modprobe.blacklist=nouveau resume=UUID=e43a7107-16ea-4228-8c10-8f02eb21bfae\n		initrd ($drive1)//initramfs-6.6.13-200.fc39.x86_64.img\n	}\n";
 
         theme = pkgs.stdenv.mkDerivation {
           pname = "distro-grub-themes";
@@ -120,6 +120,7 @@ in {
     maim
     xclip
     nextcloud-client
+    btrfs-progs
   ];
 
   # Font things
