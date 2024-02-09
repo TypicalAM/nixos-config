@@ -89,7 +89,7 @@ in {
     isNormalUser = true;
     description = "Adam Piaseczny";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "video" "wheel" "audio" ];
+    extraGroups = [ "networkmanager" "video" "wheel" "audio" "input" ];
   };
 
   # Allow unfree packages

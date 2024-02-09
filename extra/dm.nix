@@ -14,6 +14,11 @@ in {
     libsForQt5.qtstyleplugin-kvantum
     lxappearance
     qt5ct
+    hyprpaper
+    waybar
+    wl-clipboard
+    grim
+    slurp
   ];
 
   programs.dconf.enable = true;
