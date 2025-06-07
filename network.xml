@@ -1,0 +1,9 @@
+<network>
+  <name>nixnat</name>
+  <forward mode='nat'/>
+  <ip address='2.1.3.1' netmask='255.255.255.0'>
+    <dhcp>
+      <host mac='52:54:00:12:34:56' ip='2.1.3.7'/>
+    </dhcp>
+  </ip>
+</network>
