@@ -98,6 +98,11 @@
     device = "hostshare";
   };
 
+  security.sudo = {
+    enable = true;
+    wheelNeedsPassword = false;
+  };
+
   networking = {
     useDHCP = false;
     defaultGateway = "2.1.3.1";
