@@ -1,8 +1,11 @@
 { pkgs, lib, ... }:
 
 {
-  networking.hostName = "zajac18";
   time.timeZone = "Europe/Warsaw";
+  networking = {
+    hostName = "zajac18";
+    firewall.enable = false;
+  };
 
   nix = {
     package = pkgs.nix;
