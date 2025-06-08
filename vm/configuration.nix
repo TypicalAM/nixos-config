@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 {
-  networking.hostName = "placeholderX";
+  networking.hostName = "zajac18";
   time.timeZone = "Europe/Warsaw";
 
   nix = {
