@@ -38,7 +38,7 @@
     users.adam = {
       isNormalUser = true;
       description = "Adam";
-      extraGroups = [ "docker" "wheel" ];
+      extraGroups = [ "docker" "wheel" "users" ];
       initialPassword = "12345678";
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN1mU7I3EFWpa9zyWOKJs6TRJATQkwPH/utv5/e26qcI Nix development VM"
@@ -78,7 +78,7 @@
       "cd.." = "cd ../../";
       cpp = "rsync -r --info=progress2 ";
       rf = "rm -r -f";
-      rebuild = "sudo nixos-rebuild switch --flake /home/adam/nixos-config#dev";
+      rebuild = "sudo nixos-rebuild switch --flake /mnt/share/nixos-config#dev";
       vi = "nvim";
       ga = "git add .";
       gc = "git commit -m";
@@ -106,7 +106,7 @@
     '';
   };
 
-  fileSystems."/home/adam" = {
+  fileSystems."/mnt/share" = {
     fsType = "virtiofs";
     device = "hostshare";
   };
@@ -121,6 +121,15 @@
       prefixLength = 24;
     }];
   };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-label/home";
+    fsType = "ext4";
+    options = [ "defaults" ];
+  };
+
+  systemd.tmpfiles.rules =
+    [ "d /home 0775 root root -" "d /home/adam 0700 adam users -" ];
 
   system.stateVersion = "25.05";
 }
