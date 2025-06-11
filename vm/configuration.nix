@@ -87,7 +87,7 @@
       "cd.." = "cd ../../";
       cpp = "rsync -r --info=progress2 ";
       rf = "rm -r -f";
-      rebuild = "sudo nixos-rebuild switch --flake /mnt/share/nixos-config#dev";
+      rebuild = "sudo nixos-rebuild switch --flake /mnt/share/nixos-config/vm#dev";
       vi = "nvim";
       ga = "git add .";
       gc = "git commit -m";
