@@ -13,8 +13,8 @@
       dev = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./vm/configuration.nix
-          ./vm/boot-config.nix
+          ./configuration.nix
+          ./boot-config.nix
           "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix"
         ];
       };
