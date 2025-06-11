@@ -12,7 +12,7 @@
               type = "filesystem";
               format = "ext4";
               mountpoint = "/home";
-              extraArgs = ["-L" "home"];
+              extraArgs = [ "-L" "home" ];
             };
           };
         };
