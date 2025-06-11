@@ -13,7 +13,7 @@ To build the system image based on the config:
 ```sh
 mkdir output store
 chmod -R 777 output store # just this one time
-docker run --rm -it -p 8080:8080 -v ./store:/store -v ./output:/output image-builder:stage
+docker run --rm -it -p 8080:8080 -v ./store:/store -v ./output:/output typicalam/vm-builder
 curl --data-binary @vm/configuration.nix localhost:8080
 {"filename": "long-hash.qcow2"} # You can close the container at this point
 ```
