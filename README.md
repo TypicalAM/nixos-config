@@ -1,48 +1,44 @@
 # NixOS Configuration
 
-This is my current NixOS configuration, while im figuring the system out. NixOS is a Linux distribution built on the Nix package manager, which provides a declarative and reproducible approach to system configuration.
+This is my current NixOS configuration. I've come to the conclusion that nix doesn't make sense for me in a graphical setting, those graphical configs are left here for bookeeping. I am actively experimenting with a virtual machine setup running locally using `libvirt`/`qemu`. The VM setup is the following:
 
-## Prerequisites
+- Host share folder via `virtiofs`: `/mnt/share`
+- First `qcow2` image built by my [image-builder](https://github.com/TypicalAM/vm-builder) for system files
+- Second `qcow2` image made by hand for my home directory (GPT with ext4)
 
-Before proceeding with the NixOS configuration, ensure that you have the following prerequisites:
+## Running
 
-- A basic understanding of Linux and system administration.
-- Access to a NixOS installation or a virtual machine to test your configuration.
-- Familiarity with the Nix package manager and its concepts.
+To build the system image based on the config:
 
-## Building and Activating the Configuration
-
-Once you have made changes to the NixOS configuration, follow these steps to build and activate it:
-
-1. Ensure that you are in the directory containing your NixOS configuration files.
-2. Build the configuration and once the build process completes successfully, activate it.
-
-```
-sudo nixos-rebuild switch
+```sh
+mkdir output store
+chmod -R 777 output store # just this one time
+docker run --rm -it -p 8080:8080 -v ./store:/store -v ./output:/output image-builder:stage
+curl --data-binary @vm/configuration.nix localhost:8080
+{"filename": "long-hash.qcow2"} # You can close the container at this point
 ```
 
-3. Now the new configuration will take effect.
+To build the second image (home), you can also use [disko](https://github.com/nix-community/disko) if you know what you're doing:
 
-## TODO
+```sh
+chmod +x vm/make-home.sh
+./vm/make-home.sh # generates a home.qcow2
+```
 
-Things that I have yet to figure out:
+Define the network, so that the guest machine is accessible using the `2.1.3.7` ip:
 
-- [x] Dual GPU (AMD + NVIDIA) (partly)
-- [ ] Pywalfox
-- [ ] Python `venv`s
-- [ ] Kitty and zsh and aliases
-- [x] VFIO and GPU Passthrough
-- [x] Nextcloud-client not complaining
-- [x] Shared grub for all my systems (decided against it since it would put a dependency on external systems)
+```sh
+virsh --connect=qemu:///system net-define vm/network.xml
+virsh --connect=qemu:///system start nixnat
+virsh --connect=qemu:///system define vm/libvirt-config.xml
+virsh --connect=qemu:///system edit nixvm # look for home directory and change paths to the images
+```
 
-## Additional Resources
+> I ran into some network problems, namely the guest device not being able to access the internet. Changing the default network firewall backend to `iptables` seemed to fix the issue. Probably a fedora-42-only issue.
 
-For more information and advanced configuration options, refer to the following resources:
+If you are using SELinux you will run into permission problems in `libvirt`, so I recommend moving the images to their defualt pool (good) or disabling SELinux (bad). After running those commands you can:
 
-- [NixOS Manual](https://nixos.org/manual/nixos/stable/)
-- [Nix Package Manager Manual](https://nixos.org/manual/nix/stable/)
-- [NixOS Wiki](https://nixos.wiki/)
-
-## Contributing
-
-Contributions to this repository are welcome. If you find any issues or have suggestions for improvement, please submit a pull request.
+```sh
+virsh --connect=qemu:///system start nixvm --console
+ssh adam@2.1.3.7 # Password 12345678
+```

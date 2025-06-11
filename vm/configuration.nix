@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   time.timeZone = "Europe/Warsaw";
@@ -22,6 +22,9 @@
     rsync
     tmux
     python311
+    gh
+    ripgrep
+    nil
   ];
 
   services.openssh = {
@@ -45,6 +48,7 @@
       initialPassword = "12345678";
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN1mU7I3EFWpa9zyWOKJs6TRJATQkwPH/utv5/e26qcI Nix development VM"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEsbsgABdG3HSaN3e2Tp0r/XnUIibHAGAXKbKSiEAdHY Nix development VM Small"
       ];
 
       packages = with pkgs; [
